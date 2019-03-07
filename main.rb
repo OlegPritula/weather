@@ -22,14 +22,19 @@ clothes_files = Dir["data/*"]
 # Создаем объект класса
 clothes = ClothesCollection.new(clothes_files)
 
+system("clear") || system("cls")
+
 # Ожидаем ответа на вопрос
 puts "Сколько градусов за окном? (можно с минусом)"
+puts
 user_input = STDIN.gets.to_i
 
-# Передаем ответ для обработки созданному объекту
-clothes.select_by_weather(user_input)
+# Определяем переменную как массив
+clothes_select = []
+
+# Группирование одежды по типам и отбор случайных элементов из одного типа одежды
+clothes.select_by_weather(user_input).each_value { |value| clothes_select << value.sample }
 
 # Выводим одежду по запросу
 puts "\nПредлагаем сегодня надеть"
-puts clothes.clothes_select
-puts
+puts clothes_select
